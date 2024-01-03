@@ -19,10 +19,12 @@ def load_image(image_path):
     except IOError as e:
         raise IOError(f"Unable to load image. Make sure the file exists and is an image file. Error: {e}")
 
-def save_image(image, output_path):
+def save_image(image, output_path="."):
     """
-    Save the image to the given path.
+    Save the image to the given path. Default is root folder.
     """
+    if not os.path.isabs(output_path):
+        output_path = os.path.join(os.getcwd(), output_path)
     try:
         image.save(output_path, 'PNG')
     except IOError as e:
